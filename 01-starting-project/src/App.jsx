@@ -1,30 +1,42 @@
+import { useState } from "react";
 import { CORE_CONCEPTS, EXAMPLES } from "./data";
 import Header from "./components/Header";
 import CoreConcept from "./components/CoreConcept";
-import { Children, useState } from "react";
 import TabButton from "./components/TabButton";
 
 function App() {
+    // States:
     const [selectedTopic, setSelectedTopic] = useState("Please Select a Topic");
-  return (
-    <div>
-        <Header />
-        <main>
-            <h2>Time to get started!</h2>
+    
+    // Event Handlers:
+    function handleClickExample (key) {
+        setSelectedTopic(key)
+        console.log('clicked on: '+ selectedTopic)
+    }
 
-            <section id="core-concepts">
-                <h2>Core Concepts</h2>
-                <SectionCoreConcepts />
-            </section>
+    // App:
+    return (
+        <div>
+            <Header />
+            <main>
+                <h2>Time to get started!</h2>
 
-            <section id="examples">
-                <h2>Examples</h2>
-                <SectionExamples />
-                {selectedTopic}
-            </section>
+                <section id="core-concepts">
+                    <h2>Core Concepts</h2>
+                    <SectionCoreConcepts />
+                </section>
 
-        </main>
-    </div>
+                <section id="examples">
+                    <h2>Examples</h2>
+                    <SectionExamples 
+                    setStateTopic = {handleClickExample}
+                        
+                    />
+                    {selectedTopic}
+                </section>
+
+            </main>
+        </div>
   );
 }
 
@@ -44,7 +56,7 @@ function SectionCoreConcepts() {
     );
 }
 
-function SectionExamples() {
+function SectionExamples({setStateTopic}) {
     
     return (
         <menu>
@@ -54,17 +66,11 @@ function SectionExamples() {
                 <TabButton
                     key = {key}
                     title={EXAMPLES[key].title}
-                    onSelect={()=>handleClickExample(key)}
+                    onSelect={()=>setStateTopic(key)}
                 />
             )}
         </menu>)
 }
 
-const handleClickExample = (key) => {
-    console.log('clicked on: '+ key)
-}
-export default App;
 
-// <button key={key} onClick={()=>handleClickExample(key, setSelectedTopic)}> 
-//     {EXAMPLES[key].title}
-// </button>
+export default App;
