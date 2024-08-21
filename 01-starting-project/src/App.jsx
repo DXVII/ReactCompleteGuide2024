@@ -6,9 +6,11 @@ import TabButton from "./components/TabButton";
 import TabContent from "./components/TabContent";
 
 function App() {
+
     // States:
     const [selectedTopic, setSelectedTopic] = useState('');
     console.log(`Current selectedTopic: ${selectedTopic}`)
+
     // Event Handlers:
     function handleClickExample (key) {
         setSelectedTopic(key)
@@ -28,11 +30,13 @@ function App() {
 
                 <section id="examples">
                     <h2>Examples</h2>
-                    <SectionExamples
+                    <SectionTabButtons
                         selectedTopic={selectedTopic} 
                         handleClickExample={handleClickExample} 
                     />
-                    <TabContent selectedTopic={selectedTopic} />
+                    <TabContent 
+                        selectedTopic={selectedTopic} 
+                    />
                 </section>
 
             </main>
@@ -56,7 +60,7 @@ function SectionCoreConcepts() {
     );
 }
 
-function SectionExamples({selectedTopic,handleClickExample}) {
+function SectionTabButtons({selectedTopic,handleClickExample}) {
     
     return (
         <menu>
