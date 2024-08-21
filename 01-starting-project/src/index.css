@@ -145,6 +145,14 @@ main h2 {
   margin: 0;
 }
 
+#tab-content pre {
+  border-radius: 6px;
+  background-color: #140524;
+  padding: 2rem;
+
+}
+
 #tab-content code {
   font-size: 1rem;
+  
 }
