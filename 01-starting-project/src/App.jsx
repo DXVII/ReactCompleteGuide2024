@@ -1,4 +1,3 @@
-
 import Header from './components/Header';
 import SectionCoreConcepts from './components/SectionCoreConcepts';
 import SectionExamples from './components/SectionExamples';
