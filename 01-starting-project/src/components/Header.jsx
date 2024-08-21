@@ -1,10 +1,10 @@
 const reactDescriptions = ['Fundamental', 'Crucial', 'Core'];
 
-export default function  genRandomInt(max) {
+function  genRandomInt(max) {
   return Math.floor(Math.random() * (max));
 }
 
-function Header() {
+export default function Header() {
   return (
     <header>
       <img src="src/assets/react-core-concepts.png" alt="Stylized atom" />
