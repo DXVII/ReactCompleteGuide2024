@@ -8,11 +8,10 @@ import TabContent from "./components/TabContent";
 function App() {
     // States:
     const [selectedTopic, setSelectedTopic] = useState('');
-    
+    console.log(`Current selectedTopic: ${selectedTopic}`)
     // Event Handlers:
     function handleClickExample (key) {
         setSelectedTopic(key)
-        console.log('state is: '+ selectedTopic)
     }
 
     // App:
