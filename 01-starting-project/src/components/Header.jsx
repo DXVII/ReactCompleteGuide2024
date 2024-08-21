@@ -1,6 +1,6 @@
 const reactDescriptions = ['Fundamental', 'Crucial', 'Core'];
 
-function genRandomInt(max) {
+export default function  genRandomInt(max) {
   return Math.floor(Math.random() * (max));
 }
 
@@ -15,5 +15,3 @@ function Header() {
     </header>
   );
 }
-
-export default Header;

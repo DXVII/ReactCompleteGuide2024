@@ -1,4 +1,4 @@
-function CoreConcept({title, description, imgSrc, imgAlt}){
+export default function CoreConcept({title, description, imgSrc, imgAlt}){
     const uniqueId = `core-concept-${title}`
     return(
     <li>
@@ -9,5 +9,3 @@ function CoreConcept({title, description, imgSrc, imgAlt}){
   )
 
 }
-
-export default CoreConcept;

@@ -3,15 +3,16 @@ import { CORE_CONCEPTS, EXAMPLES } from "./data";
 import Header from "./components/Header";
 import CoreConcept from "./components/CoreConcept";
 import TabButton from "./components/TabButton";
+import TabContent from "./components/TabContent";
 
 function App() {
     // States:
-    const [selectedTopic, setSelectedTopic] = useState("Please Select a Topic");
+    const [selectedTopic, setSelectedTopic] = useState('');
     
     // Event Handlers:
     function handleClickExample (key) {
         setSelectedTopic(key)
-        console.log('clicked on: '+ selectedTopic)
+        console.log('state is: '+ selectedTopic)
     }
 
     // App:
@@ -29,10 +30,9 @@ function App() {
                 <section id="examples">
                     <h2>Examples</h2>
                     <SectionExamples 
-                    setStateTopic = {handleClickExample}
-                        
+                        handleClickExample={handleClickExample} 
                     />
-                    {selectedTopic}
+                    <TabContent selectedTopic={selectedTopic} />
                 </section>
 
             </main>
@@ -56,7 +56,7 @@ function SectionCoreConcepts() {
     );
 }
 
-function SectionExamples({setStateTopic}) {
+function SectionExamples({handleClickExample}) {
     
     return (
         <menu>
@@ -66,7 +66,7 @@ function SectionExamples({setStateTopic}) {
                 <TabButton
                     key = {key}
                     title={EXAMPLES[key].title}
-                    onSelect={()=>setStateTopic(key)}
+                    onSelect={()=>handleClickExample(key)}
                 />
             )}
         </menu>)
