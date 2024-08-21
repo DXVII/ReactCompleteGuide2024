@@ -1,15 +1,28 @@
-import Header from "./components/Header";
 import { CORE_CONCEPTS } from "./data";
+import Header from "./components/Header";
+import CoreConcept from "./components/CoreConcept";
 
-function CoreConcept({title, description, imgSrc, imgAlt}){
-  return(
-    <li>
-      <img src={imgSrc} alt={imgAlt} />
-      <h3>{title}</h3>
-      <p>{description}</p>
-    </li>
-  )
+function SectionCoreConcepts() {
+    return <ul> 
+        {CORE_CONCEPTS.map( (concept) => 
+            <CoreConcept
+                key={concept.title}
+                title={concept.title}
+                description={concept.description}
+                imgSrc={concept.image}
+                imgAlt={concept.title}
+            />
+        )}
+    </ul>;
+}
 
+function SectionExamples() {
+    <menu>
+        <button>Components</button>
+        <button>JSX</button>
+        <button>Props</button>
+        <button>State</button>
+    </menu>
 }
 
 function App() {
@@ -20,25 +33,11 @@ function App() {
         <h2>Time to get started!</h2>
         <section id="core-concepts">
             <h2>Core Concepts</h2>
-            <ul>
-              {CORE_CONCEPTS.map((concept) => (
-                <CoreConcept
-                  title={concept.title}
-                  description={concept.description}
-                  imgSrc={concept.image}
-                  imgAlt={concept.title}
-                />
-              ))}
-            </ul>
+            <SectionCoreConcepts />
         </section>
         <section id="examples">
           <h2>Examples</h2>
-          <menu>
-            <button>Components</button>
-            <button>JSX</button>
-            <button>Props</button>
-            <button>State</button>
-          </menu>
+          <SectionExamples />
         </section>
       </main>
     </div>
