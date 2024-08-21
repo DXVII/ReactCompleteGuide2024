@@ -1,8 +1,11 @@
 import { CORE_CONCEPTS, EXAMPLES } from "./data";
 import Header from "./components/Header";
 import CoreConcept from "./components/CoreConcept";
+import { Children, useState } from "react";
+import TabButton from "./components/TabButton";
 
 function App() {
+    const [selectedTopic, setSelectedTopic] = useState("Please Select a Topic");
   return (
     <div>
         <Header />
@@ -17,6 +20,7 @@ function App() {
             <section id="examples">
                 <h2>Examples</h2>
                 <SectionExamples />
+                {selectedTopic}
             </section>
 
         </main>
@@ -41,19 +45,25 @@ function SectionCoreConcepts() {
 }
 
 function SectionExamples() {
+    
     return (
         <menu>
+            {/* note: onSelect is an arbitrary name for passing
+              the event handler to the "onClick" defined in TabButton */}
             {Object.keys(EXAMPLES).map( (key) => 
-                <button key={key} onClick={()=>handleClickExample(key)}> {
-                    EXAMPLES[key].title}
-                </button>
+                <TabButton 
+                    title={EXAMPLES[key].title}
+                    onSelect={()=>handleClickExample(key)}
+                />
             )}
         </menu>)
 }
 
 const handleClickExample = (key) => {
-    console.log('clicked on: '+key)
+    console.log('clicked on: '+ key)
 }
-
 export default App;
 
+// <button key={key} onClick={()=>handleClickExample(key, setSelectedTopic)}> 
+//     {EXAMPLES[key].title}
+// </button>
