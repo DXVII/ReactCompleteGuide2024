@@ -44,13 +44,16 @@ function SectionExamples() {
     return (
         <menu>
             {Object.keys(EXAMPLES).map( (key) => 
-                <button key={key}> {
+                <button key={key} onClick={()=>handleClickExample(key)}> {
                     EXAMPLES[key].title}
                 </button>
             )}
         </menu>)
 }
 
+const handleClickExample = (key) => {
+    console.log('clicked on: '+key)
+}
 
 export default App;
 
