@@ -29,6 +29,7 @@ function SectionCoreConcepts() {
         <ul> 
             {CORE_CONCEPTS.map( (concept) => 
                 <CoreConcept
+                    key={concept.title}
                     title={concept.title}
                     description={concept.description}
                     imgSrc={concept.image}
@@ -42,8 +43,10 @@ function SectionCoreConcepts() {
 function SectionExamples() {
     return (
         <menu>
-            {Object.keys(EXAMPLES).map( 
-                (key) => <button>{EXAMPLES[key].title}</button>
+            {Object.keys(EXAMPLES).map( (key) => 
+                <button key={key}> {
+                    EXAMPLES[key].title}
+                </button>
             )}
         </menu>)
 }

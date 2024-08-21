@@ -1,5 +1,6 @@
 function CoreConcept({title, description, imgSrc, imgAlt}){
-  return(
+    const uniqueId = `core-concept-${title}`
+    return(
     <li>
       <img src={imgSrc} alt={imgAlt} />
       <h3>{title}</h3>
