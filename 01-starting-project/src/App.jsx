@@ -51,7 +51,8 @@ function SectionExamples() {
             {/* note: onSelect is an arbitrary name for passing
               the event handler to the "onClick" defined in TabButton */}
             {Object.keys(EXAMPLES).map( (key) => 
-                <TabButton 
+                <TabButton
+                    key = {key}
                     title={EXAMPLES[key].title}
                     onSelect={()=>handleClickExample(key)}
                 />
