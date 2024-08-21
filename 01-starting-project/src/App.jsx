@@ -17,7 +17,7 @@ function App() {
 
     // App:
     return (
-        <div>
+        <>
             <Header />
             <main>
                 <h2>Time to get started!</h2>
@@ -36,7 +36,7 @@ function App() {
                     <TabContent selectedTopic={selectedTopic} />
                 </section>
             </main>
-        </div>
+        </>
     );
 }
 
