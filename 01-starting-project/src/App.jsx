@@ -29,7 +29,8 @@ function App() {
 
                 <section id="examples">
                     <h2>Examples</h2>
-                    <SectionExamples 
+                    <SectionExamples
+                        selectedTopic={selectedTopic} 
                         handleClickExample={handleClickExample} 
                     />
                     <TabContent selectedTopic={selectedTopic} />
@@ -56,7 +57,7 @@ function SectionCoreConcepts() {
     );
 }
 
-function SectionExamples({handleClickExample}) {
+function SectionExamples({selectedTopic,handleClickExample}) {
     
     return (
         <menu>
@@ -64,8 +65,9 @@ function SectionExamples({handleClickExample}) {
               the event handler to the "onClick" defined in TabButton */}
             {Object.keys(EXAMPLES).map( (key) => 
                 <TabButton
-                    key = {key}
+                    key={EXAMPLES[key].title}
                     title={EXAMPLES[key].title}
+                    selectedTopic={selectedTopic}
                     onSelect={()=>handleClickExample(key)}
                 />
             )}

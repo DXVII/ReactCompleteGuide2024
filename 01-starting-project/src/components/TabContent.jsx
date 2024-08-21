@@ -4,7 +4,7 @@ export default function TabContent({selectedTopic}) {
     // initial prompt
     if(!selectedTopic) return <p id="tab-content">Please select a topic</p>
     
-    // adjusted content
+    // adjust content per key
     return (
         <div id="tab-content">
             <h3>{EXAMPLES[selectedTopic].title}</h3>

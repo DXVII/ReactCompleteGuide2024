@@ -1,7 +1,13 @@
-export default function TabButton({ title, onSelect }) {
+export default function TabButton({ title, selectedTopic, onSelect }) {
+    const isSelected = (title.toLowerCase()===selectedTopic.toLowerCase());
     return (
         <li>
-            <button onClick={onSelect}>{title}</button>
+            <button 
+                className={isSelected ? "active": undefined}
+                onClick={onSelect}
+            >
+                {title}
+            </button>
         </li>
     );
 }
