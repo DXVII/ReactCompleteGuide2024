@@ -1,11 +1,49 @@
-export default function Player({ playerName }) {
+import React from "react"
+import { useState } from "react"
+
+
+export default function Player({ playerName, symbol }) {
+    // --------------------------------------------------------------------------------
+    // --- State ----------------------------------------------------------------------
+    // --------------------------------------------------------------------------------
+    const [isEditing, setIsEditing] = useState(false)
+    const [chosenName, setChosenName] = useState(playerName)
+
+    // --------------------------------------------------------------------------------
+    // --- Functions ------------------------------------------------------------------
+    // --------------------------------------------------------------------------------
+    const handleEditClick = () => setIsEditing(true)
+    const handleEditName = (e) => setChosenName(e.target.value)
+
+    // --------------------------------------------------------------------------------
+    // --- Conditional rendering ------------------------------------------------------
+    // --------------------------------------------------------------------------------
+    const playerNameBox = isEditing ? (
+        <input
+            type="text"
+            defaultValue={chosenName}
+            onChange={handleEditName}
+        />
+    ) : (
+        <span className="player-name">{chosenName}</span>
+    )
+
+    const editSaveButton = isEditing ? (
+        <button onClick={() => setIsEditing(false)}>Save</button>
+    ) : (
+        <button onClick={handleEditClick}>Edit</button>
+    )
+
+    // --------------------------------------------------------------------------------
+    // --- Component Output -----------------------------------------------------------
+    // --------------------------------------------------------------------------------
     return (
         <li>
             <span className="players">
-                <span className="player-name">playerName</span>
-                <span className="player-symbol">X</span>
+                {playerNameBox}
+                <span className="player-symbol">{symbol}</span>
             </span>
-            <button className="players">Edit Name</button>
+            {editSaveButton}
         </li>
     )
 }

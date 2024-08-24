@@ -1,6 +1,6 @@
 import React from 'react'
 import Player from './components/Player'
-function App() {
+export default function App() {
     return (
         <main>
             <div id="game-container">
@@ -18,5 +18,3 @@ function App() {
         </main>
     )
 }
-
-export default App
