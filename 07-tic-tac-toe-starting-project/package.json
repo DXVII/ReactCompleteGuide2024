@@ -8,7 +8,7 @@
         "build": "vite build",
         "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
         "preview": "vite preview",
-        "prepare": "husky && husky install"
+        "prepare": "husky init"
     },
     "dependencies": {
         "react": "^18.2.0",
@@ -29,7 +29,18 @@
         "prettier": "^3.3.3",
         "vite": "^4.4.5"
     },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged",
+            "pre-push": "npm test"
+        }
+        },
     "lint-staged": {
-        "*.{jsx,js,css,md}": "prettier --write"
+        "*.{js,jsx,css,md,html}": [
+            "pretty-quick --staged",
+            "eslint --fix",
+            "git add"
+        ]
     }
+
 }
