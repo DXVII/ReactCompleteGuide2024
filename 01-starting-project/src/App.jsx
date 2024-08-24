@@ -1,6 +1,7 @@
-import Header from './components/Header';
-import SectionCoreConcepts from './components/SectionCoreConcepts';
-import SectionExamples from './components/SectionExamples';
+import React from 'react'
+import Header from './components/Header'
+import SectionCoreConcepts from './components/SectionCoreConcepts'
+import SectionExamples from './components/SectionExamples'
 
 export default function App() {
     return (
@@ -12,5 +13,5 @@ export default function App() {
                 <SectionExamples />
             </main>
         </>
-    );
+    )
 }
