@@ -1,25 +1,23 @@
 import React from 'react'
 import { useState } from 'react'
 
-export default function Player({ playerName, symbol }) {
+export default function Player({ initialName, symbol }) {
     // --------------------------------------------------------------------------------
     // --- State ----------------------------------------------------------------------
     // --------------------------------------------------------------------------------
     const [isEditing, setIsEditing] = useState(false)
-    const [chosenName, setChosenName] = useState(playerName)
-
+    const [chosenName, setChosenName] = useState(initialName)
 
     // --------------------------------------------------------------------------------
     // --- Functions ------------------------------------------------------------------
     // --------------------------------------------------------------------------------
-    const handleEditName = (e) => setChosenName(e.target.value)
-
+    const handleEditName = (event) => setChosenName(event.target.value)
 
     // --------------------------------------------------------------------------------
     // --- Conditional rendering ------------------------------------------------------
     // --------------------------------------------------------------------------------
-    
-    // Logic: Editable Name Box
+
+    // Logic: Editable Name Box (two way binding)
     // 1) when not editting, show chosenName state
     // 2) onCLick, set isEditing to true
     // 3) isEditing while true, display input field
@@ -28,6 +26,7 @@ export default function Player({ playerName, symbol }) {
 
     const playerNameBox = isEditing ? (
         <input
+            className="player"
             type="text"
             defaultValue={chosenName}
             onChange={handleEditName}
@@ -37,15 +36,19 @@ export default function Player({ playerName, symbol }) {
     )
 
     // Logic: Edit/Save Button
-    // 1) when editting, show save button, 
+    // 1) when editting, show save button,
     // 2) onclicking save, switch isEditing to false
     // 3) now not editting, show edit button
     // 4) onclicking edit, switch isEditing to true
     // --> 1)
     const editSaveButton = isEditing ? (
-        <button onClick={() => setIsEditing(false)}>Save</button>
+        <button className="players" onClick={() => setIsEditing(false)}>
+            Save
+        </button>
     ) : (
-        <button onClick={() => setIsEditing(true)}>Edit</button>
+        <button className="players" onClick={() => setIsEditing(true)}>
+            Edit
+        </button>
     )
 
     // --------------------------------------------------------------------------------
@@ -56,8 +59,8 @@ export default function Player({ playerName, symbol }) {
             <span className="players">
                 {playerNameBox}
                 <span className="player-symbol">{symbol}</span>
+                {editSaveButton}
             </span>
-            {editSaveButton}
         </li>
     )
 }
