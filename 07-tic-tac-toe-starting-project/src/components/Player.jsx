@@ -1,6 +1,5 @@
-import React from "react"
-import { useState } from "react"
-
+import React from 'react'
+import { useState } from 'react'
 
 export default function Player({ playerName, symbol }) {
     // --------------------------------------------------------------------------------
@@ -9,15 +8,24 @@ export default function Player({ playerName, symbol }) {
     const [isEditing, setIsEditing] = useState(false)
     const [chosenName, setChosenName] = useState(playerName)
 
+
     // --------------------------------------------------------------------------------
     // --- Functions ------------------------------------------------------------------
     // --------------------------------------------------------------------------------
-    const handleEditClick = () => setIsEditing(true)
     const handleEditName = (e) => setChosenName(e.target.value)
+
 
     // --------------------------------------------------------------------------------
     // --- Conditional rendering ------------------------------------------------------
     // --------------------------------------------------------------------------------
+    
+    // Logic: Editable Name Box
+    // 1) when not editting, show chosenName state
+    // 2) onCLick, set isEditing to true
+    // 3) isEditing while true, display input field
+    // 4) onChange, set chosenName to input value
+    // 5) onCLick, set isEditing to false --> 1) display new chosenName state
+
     const playerNameBox = isEditing ? (
         <input
             type="text"
@@ -28,10 +36,16 @@ export default function Player({ playerName, symbol }) {
         <span className="player-name">{chosenName}</span>
     )
 
+    // Logic: Edit/Save Button
+    // 1) when editting, show save button, 
+    // 2) onclicking save, switch isEditing to false
+    // 3) now not editting, show edit button
+    // 4) onclicking edit, switch isEditing to true
+    // --> 1)
     const editSaveButton = isEditing ? (
         <button onClick={() => setIsEditing(false)}>Save</button>
     ) : (
-        <button onClick={handleEditClick}>Edit</button>
+        <button onClick={() => setIsEditing(true)}>Edit</button>
     )
 
     // --------------------------------------------------------------------------------
