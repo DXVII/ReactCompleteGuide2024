@@ -1,18 +1,18 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
-import TabButton from './TabButton';
-import TabContent from './TabContent';
+import TabButton from './TabButton'
+import TabContent from './TabContent'
 
-import { EXAMPLES } from '../data';
+import { EXAMPLES } from '../data'
 
 export default function SectionExamples() {
     // States:
-    const [selectedTopic, setSelectedTopic] = useState('');
-    console.log(`Current selectedTopic: ${selectedTopic}`);
+    const [selectedTopic, setSelectedTopic] = useState('')
+    console.log(`Current selectedTopic: ${selectedTopic}`)
 
     // Event Handlers:
     function handleClickExample(key) {
-        setSelectedTopic(key);
+        setSelectedTopic(key)
     }
     return (
         <section id="examples">
@@ -23,7 +23,7 @@ export default function SectionExamples() {
             />
             <TabContent selectedTopic={selectedTopic} />
         </section>
-    );
+    )
 }
 
 function SectionTabButtons({ selectedTopic, handleClickExample }) {
@@ -40,5 +40,5 @@ function SectionTabButtons({ selectedTopic, handleClickExample }) {
                 />
             ))}
         </menu>
-    );
+    )
 }

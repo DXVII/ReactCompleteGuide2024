@@ -1,8 +1,8 @@
-import '../index.css';
-import { EXAMPLES } from '../data';
+import '../index.css'
+import { EXAMPLES } from '../data'
 export default function TabContent({ selectedTopic }) {
     // initial prompt
-    if (!selectedTopic) return <p id="tab-content">Please select a topic</p>;
+    if (!selectedTopic) return <p id="tab-content">Please select a topic</p>
 
     // adjust content per key
     return (
@@ -13,5 +13,5 @@ export default function TabContent({ selectedTopic }) {
                 <code>{EXAMPLES[selectedTopic].code}</code>
             </pre>
         </div>
-    );
+    )
 }

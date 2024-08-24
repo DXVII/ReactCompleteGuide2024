@@ -1,5 +1,5 @@
-import { CORE_CONCEPTS } from '../data';
-import CoreConcept from './CoreConcept';
+import { CORE_CONCEPTS } from '../data'
+import CoreConcept from './CoreConcept'
 export default function SectionCoreConcepts() {
     return (
         <section id="core-concepts">
@@ -16,5 +16,5 @@ export default function SectionCoreConcepts() {
                 ))}
             </ul>
         </section>
-    );
+    )
 }

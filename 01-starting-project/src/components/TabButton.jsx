@@ -1,5 +1,5 @@
 export default function TabButton({ title, selectedTopic, onSelect }) {
-    const isSelected = title.toLowerCase() === selectedTopic.toLowerCase();
+    const isSelected = title.toLowerCase() === selectedTopic.toLowerCase()
     return (
         <li>
             <button
@@ -9,5 +9,5 @@ export default function TabButton({ title, selectedTopic, onSelect }) {
                 {title}
             </button>
         </li>
-    );
+    )
 }

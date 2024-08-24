@@ -1,11 +1,12 @@
-import Player from "./components/Player";
+import React from 'react'
+import Player from './components/Player'
 function App() {
     return (
         <main>
             <div id="game-container">
                 <ol id="players">
-            <Player playerName="Player 1" />
-            <Player playerName="Player 2" />
+                    <Player playerName="Player 1" />
+                    <Player playerName="Player 2" />
                 </ol>
                 <center>
                     <div id="game-board">Game Board</div>
@@ -18,4 +19,4 @@ function App() {
     )
 }
 
-export default App;
+export default App

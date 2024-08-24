@@ -1,4 +1,4 @@
-export default function Player({playerName}){
+export default function Player({ playerName }) {
     return (
         <li>
             <span className="players">

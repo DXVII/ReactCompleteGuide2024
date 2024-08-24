@@ -34,7 +34,7 @@
             "pre-commit": "lint-staged",
             "pre-push": "npm test"
         }
-        },
+    },
     "lint-staged": {
         "*.{js,jsx,css,md,html}": [
             "pretty-quick --staged",
@@ -42,5 +42,4 @@
             "git add"
         ]
     }
-
 }
