@@ -1,27 +1,14 @@
+import Player from "./components/Player";
 function App() {
     return (
         <main>
             <div id="game-container">
                 <ol id="players">
-                    <li>
-                        <span className="players">
-                            <span className="player-name">Player 1</span>
-                            <span className="player-symbol">X</span>
-                        </span>
-                        <button className="players">Edit Name</button>
-                    </li>
-                    <li>
-                        <span className="players">
-                            <span className="player-name">Player 2</span>
-                            <span className="player-symbol">O</span>
-                        </span>
-                        <button className="players">Edit Name</button>
-                    </li>
+            <Player playerName="Player 1" />
+            <Player playerName="Player 2" />
                 </ol>
                 <center>
-                    <div id="game-board">
-                        Game Board
-                    </div> 
+                    <div id="game-board">Game Board</div>
                 </center>
             </div>
             <center>
