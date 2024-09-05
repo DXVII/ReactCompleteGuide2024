@@ -1,8 +1,10 @@
 import { useState } from 'react'
 export default function GameBoard() {
-    const [board, setBoard] = useState(Array(3).fill(Array(3).fill('x')))
+    const [board, setBoard] = useState(new Array(3).fill(new Array(3).fill('x')))
+    
 
     function handleBoardClick(i, j) {
+        console.log(i,j)
         const newBoard = [...board]
         newBoard[i][j] == 'x' ? (newBoard[i][j] = 'o') : (newBoard[i][j] = 'x')
         setBoard(newBoard)
@@ -11,18 +13,8 @@ export default function GameBoard() {
     const displayBoardCols = (row, i) => (
         <ol>
             {row.map((col, j) => (
-                <li id={j}>
-                    <button
-                        onClick={() =>
-                            console.log(
-                                'Clicked on board - ',
-                                'row: ' + i,
-                                'col ' + j
-                            )
-                        }
-                    >
-                        {col}
-                    </button>
+                <li key={`${i}-${j}`}>
+                    <button onClick={() => handleBoardClick(i,j)}>{col}</button>
                 </li>
             ))}
         </ol>
