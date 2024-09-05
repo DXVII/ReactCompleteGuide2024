@@ -1,5 +1,6 @@
 import React from 'react'
 import Player from './components/Player'
+import GameBoard from './components/GameBoard'
 export default function App() {
     return (
         <main>
@@ -10,6 +11,7 @@ export default function App() {
                 </ol>
                 <center>
                     <div id="game-board">Game Board</div>
+                    <GameBoard />
                 </center>
             </div>
             <center>
