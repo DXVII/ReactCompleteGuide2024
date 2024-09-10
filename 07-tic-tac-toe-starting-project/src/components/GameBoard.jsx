@@ -7,9 +7,9 @@ export default function GameBoard() {
     // )
 
     const [board, setBoard] = useState([
-        ['x', 'x', 'x'],
-        ['x', 'x', 'x'],
-        ['x', 'x', 'x'],
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', ''],
     ])
 
     function handleBoardClick(i, j) {
