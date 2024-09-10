@@ -1,20 +1,19 @@
 import { useState } from 'react'
 export default function GameBoard() {
     /* note fill seems to create the same object and replicate it, 
-    each row was pointing to the same object*/ 
+    each row was pointing to the same object*/
     // const [board, setBoard] = useState(
     //     new Array(3).fill(new Array(3).fill('x'))
     // )
-    
+
     const [board, setBoard] = useState([
         ['x', 'x', 'x'],
         ['x', 'x', 'x'],
         ['x', 'x', 'x'],
     ])
 
-
     function handleBoardClick(i, j) {
-        console.log(i, j)
+        // console.log(i, j)
         const newBoard = [...board]
         newBoard[i][j] == 'x' ? (newBoard[i][j] = 'o') : (newBoard[i][j] = 'x')
         setBoard(newBoard)
