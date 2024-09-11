@@ -1,22 +1,19 @@
 import React from 'react'
 import { useState } from 'react'
 
-export default function Player({ initialName, symbol }) {
-    // --------------------------------------------------------------------------------
-    // --- State ----------------------------------------------------------------------
-    // --------------------------------------------------------------------------------
+export default function Player({ initialName, symbol, activePlayer }) {
+
+    // --- State ---
     const [isEditing, setIsEditing] = useState(false)
     const [chosenName, setChosenName] = useState(initialName)
-
-    // --------------------------------------------------------------------------------
-    // --- Functions ------------------------------------------------------------------
-    // --------------------------------------------------------------------------------
+    const isActive = (activePlayer === symbol)
+    
+    // --- Functions ---
     const handleEditName = (event) => setChosenName(event.target.value)
 
-    // --------------------------------------------------------------------------------
-    // --- Conditional rendering ------------------------------------------------------
-    // --------------------------------------------------------------------------------
-
+    
+    // --- Conditional rendering ---
+    
     // Logic: Editable Name Box (two way binding)
     // 1) when not editting, show chosenName state
     // 2) onCLick, set isEditing to true
@@ -42,21 +39,21 @@ export default function Player({ initialName, symbol }) {
     // 4) onclicking edit, switch isEditing to true
     // --> 1)
     const editSaveButton = isEditing ? (
-        <button className="players" onClick={() => setIsEditing(false)}>
+        <button id="players" onClick={() => setIsEditing(false)}>
             Save
         </button>
     ) : (
-        <button className="players" onClick={() => setIsEditing(true)}>
+        <button id="players" onClick={() => setIsEditing(true)}>
             Edit
         </button>
     )
 
-    // --------------------------------------------------------------------------------
-    // --- Component Output -----------------------------------------------------------
-    // --------------------------------------------------------------------------------
+
+
+    // --- Component Output ---
     return (
-        <li>
-            <span className="players">
+        <li id="players" className={isActive ? 'active' : ''}>
+            <span id="players">
                 {playerNameBox}
                 <span className="player-symbol">{symbol}</span>
                 {editSaveButton}
