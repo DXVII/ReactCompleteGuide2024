@@ -3,17 +3,16 @@ import Player from './components/Player'
 import GameBoard from './components/GameBoard'
 
 export default function App() {
-    
     // --- State ---
     const [activePlayer, setActivePlayer] = useState('X')
-    
+
     // --- Functions ---
     const togglePlayer = () => setActivePlayer(activePlayer === 'X' ? 'O' : 'X')
 
     return (
         <main>
             <div id="game-container">
-                <ol id="players" className='highlight-player'>
+                <ol id="players" className="highlight-player">
                     <Player
                         initialName="Player 1"
                         symbol="X"

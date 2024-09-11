@@ -2,18 +2,16 @@ import React from 'react'
 import { useState } from 'react'
 
 export default function Player({ initialName, symbol, activePlayer }) {
-
     // --- State ---
     const [isEditing, setIsEditing] = useState(false)
     const [chosenName, setChosenName] = useState(initialName)
-    const isActive = (activePlayer === symbol)
-    
+    const isActive = activePlayer === symbol
+
     // --- Functions ---
     const handleEditName = (event) => setChosenName(event.target.value)
 
-    
     // --- Conditional rendering ---
-    
+
     // Logic: Editable Name Box (two way binding)
     // 1) when not editting, show chosenName state
     // 2) onCLick, set isEditing to true
@@ -47,8 +45,6 @@ export default function Player({ initialName, symbol, activePlayer }) {
             Edit
         </button>
     )
-
-
 
     // --- Component Output ---
     return (
