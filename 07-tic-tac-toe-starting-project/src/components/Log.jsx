@@ -12,7 +12,7 @@ function generateStackList(moveHistory, playerStates) {
     return moveHistory.map((log) => {
         const [ind, row, col] = log
         const logtext = (
-            <li>{`${playerStates[ind].name} played 
+            <li key={log}>{`${playerStates[ind].name} played 
                 ${playerStates[ind].symbol} on 
                 row ${row + 1}, col ${col + 1}`}</li>
         )
