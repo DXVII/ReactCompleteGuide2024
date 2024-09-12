@@ -38,6 +38,7 @@ export default function Player({ playerProps, playerIndex }) {
             size="10"
             defaultValue={name}
             onChange={handleEditName}
+            required
         />
     ) : (
         <span className="player-name">{name}</span>
@@ -49,14 +50,13 @@ export default function Player({ playerProps, playerIndex }) {
             className="player"
             type="text"
             maxlength="1"
-            size ="1"
+            size="1"
             defaultValue={symbol}
             onChange={handleEditSymbol}
+            required
         />
     ) : (
-        <span className="player-symbol">
-            {symbol}
-        </span>
+        <span className="player-symbol">{symbol}</span>
     )
 
     // Logic: Edit/Save Button

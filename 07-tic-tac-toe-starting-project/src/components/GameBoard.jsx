@@ -51,14 +51,3 @@ each row was pointing to the same object*/
 // const [board, setBoard] = useState(
 //     new Array(3).fill(new Array(3).fill('x'))
 // )
-
-/*
-TODO:
-create a derived board state using the move history
-start with initial board and replay populating the board with symbols from the 
-
-move history array 
-and
-Player symbol
-
-*/

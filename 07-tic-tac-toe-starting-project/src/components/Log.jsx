@@ -1,9 +1,9 @@
 export default function Log({ playerProps, moveHistory }) {
-    const { playerStates } = playerProps
+    const { playersStates } = playerProps
     // console.log(logStack)
     return (
         <div id="log">
-            {/* <ol>{generateStackList(moveHistory, playerStates)}</ol> */}
+            <ol>{generateStackList(moveHistory, playersStates)}</ol>
         </div>
     )
 }
@@ -19,3 +19,7 @@ function generateStackList(moveHistory, playerStates) {
         return logtext
     })
 }
+
+/*TODO:
+    fix log 0 undefined error 
+*/
