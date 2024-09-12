@@ -1,5 +1,9 @@
 import { useState } from 'react'
-export default function GameBoard({ playerProps, handleBoardClick, moveHistory }) {
+export default function GameBoard({
+    playerProps,
+    handleBoardClick,
+    moveHistory,
+}) {
     const { playersStates } = playerProps
     const board = deriveBoard(moveHistory, playersStates)
 
@@ -30,13 +34,9 @@ export default function GameBoard({ playerProps, handleBoardClick, moveHistory }
 // Helper Function - derive board state
 const deriveBoard = (moveHistory, playersStates) => {
     const board = createSquareArray(3)
-    let ind = 0
     moveHistory.map((log) => {
-        const symbol = playersStates[ind].symbol
-        const row = log[1]
-        const col = log[2]
-        board[row][col] = symbol
-        ind = ind === 0 ? 1 : 0
+        const [ind, row, col] = log
+        board[row][col] = playersStates[ind].symbol
     })
     return board
 }
@@ -52,7 +52,6 @@ each row was pointing to the same object*/
 //     new Array(3).fill(new Array(3).fill('x'))
 // )
 
-
 /*
 TODO:
 create a derived board state using the move history
@@ -62,4 +61,4 @@ move history array
 and
 Player symbol
 
-*/ 
+*/

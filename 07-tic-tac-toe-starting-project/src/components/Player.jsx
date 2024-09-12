@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
 
-export default function Player({playerProps, playerIndex}) {
+export default function Player({ playerProps, playerIndex }) {
     const { playersStates, setPlayersStates, activeInd } = playerProps
-    const {name, symbol} = playersStates[playerIndex]
+    const { name, symbol } = playersStates[playerIndex]
     const isActive = playerIndex === activeInd
 
     // --- State ---
@@ -74,7 +74,9 @@ export default function Player({playerProps, playerIndex}) {
     return (
         <li id="players" className={isActive ? 'active' : ''}>
             <span id="players">
-                {playerNameBox}{symbolNameBox}{editSaveButton}
+                {playerNameBox}
+                {symbolNameBox}
+                {editSaveButton}
             </span>
         </li>
     )

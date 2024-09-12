@@ -6,35 +6,30 @@ import Log from './components/Log'
 export default function App() {
     // --- State ---
     const [playersStates, setPlayersStates] = useState([
-        {name: 'Player 1', symbol: 'X'}, 
-        {name: 'Player 2', symbol: 'O'}
+        { name: 'Player 1', symbol: 'X' },
+        { name: 'Player 2', symbol: 'O' },
     ])
 
-    const [activeInd, setActiveInd] = useState(0);
-    const [moveHistory, setMoveHistory] = useState([]);
-
+    const [activeInd, setActiveInd] = useState(0)
+    const [moveHistory, setMoveHistory] = useState([])
 
     // --- Functions ---
     const togglePlayer = () => setActiveInd(activeInd === 0 ? 1 : 0)
-    const handleBoardClick = (i,j) => {
+    const handleBoardClick = (i, j) => {
         // console.log("Clicked:",i, j)
-        // const newBoard = [...board]
-        // newBoard[i][j] = activePlayer
-        // setBoard(newBoard)
         addPlayerMove(i, j)
         togglePlayer()
     }
     const addPlayerMove = (row, col) => {
         const copyHistory = moveHistory
-        copyHistory.push([activePlayer, row, col])
+        copyHistory.push([activeInd, row, col])
         setMoveHistory(copyHistory)
-      
     }
 
     const playerProps = {
         playersStates,
         setPlayersStates,
-        activeInd
+        activeInd,
     }
     return (
         <main>
