@@ -1,14 +1,22 @@
 import { useState } from 'react'
 import Player from './components/Player'
 import GameBoard from './components/GameBoard'
+import Log from './components/Log'
 
 export default function App() {
     // --- State ---
-    const [activePlayer, setActivePlayer] = useState('X')
+    const [activePlayer, setActivePlayer] = useState('X');
+    const [moveHistory, setMoveHistory] = useState([]);
+
 
     // --- Functions ---
     const togglePlayer = () => setActivePlayer(activePlayer === 'X' ? 'O' : 'X')
-
+    const addPlayerMove = (row, col) => {
+        const copyHistory = moveHistory
+        copyHistory.push([activePlayer, row, col])
+        setMoveHistory(copyHistory)
+      
+    }
     return (
         <main>
             <div id="game-container">
@@ -29,11 +37,15 @@ export default function App() {
                     <GameBoard
                         activePlayer={activePlayer}
                         togglePlayer={togglePlayer}
+                        addPlayerMove={addPlayerMove}
                     />
                 </center>
             </div>
+            <Log logStack={moveHistory} />
             <center>
-                <button>Reset Game</button>
+                <button onClick={() => window.location.reload(false)}>
+                    Reset Game
+                </button>
             </center>
         </main>
     )

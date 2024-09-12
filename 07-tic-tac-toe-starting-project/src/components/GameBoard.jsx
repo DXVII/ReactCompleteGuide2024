@@ -1,5 +1,5 @@
 import { useState } from 'react'
-export default function GameBoard({ activePlayer, togglePlayer }) {
+export default function GameBoard({ activePlayer, togglePlayer, addPlayerMove }) {
     const [board, setBoard] = useState(createSquareArray(3))
 
     function handleBoardClick(i, j) {
@@ -7,6 +7,7 @@ export default function GameBoard({ activePlayer, togglePlayer }) {
         const newBoard = [...board]
         newBoard[i][j] = activePlayer
         setBoard(newBoard)
+        addPlayerMove(i,j)
         togglePlayer()
     }
 
