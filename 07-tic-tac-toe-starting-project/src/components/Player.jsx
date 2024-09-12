@@ -35,6 +35,7 @@ export default function Player({ playerProps, playerIndex }) {
         <input
             className="player"
             type="text"
+            size="10"
             defaultValue={name}
             onChange={handleEditName}
         />
@@ -45,13 +46,17 @@ export default function Player({ playerProps, playerIndex }) {
     // Logic: Editable SymbolBox
     const symbolNameBox = isEditing ? (
         <input
-            className="player-symbol"
+            className="player"
             type="text"
-            defaultValue={name}
+            maxlength="1"
+            size ="1"
+            defaultValue={symbol}
             onChange={handleEditSymbol}
         />
     ) : (
-        <span className="player-symbol">{symbol}</span>
+        <span className="player-symbol">
+            {symbol}
+        </span>
     )
 
     // Logic: Edit/Save Button
