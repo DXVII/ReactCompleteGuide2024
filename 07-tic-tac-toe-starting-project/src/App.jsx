@@ -5,43 +5,54 @@ import Log from './components/Log'
 
 export default function App() {
     // --- State ---
-    const [activePlayer, setActivePlayer] = useState('X');
+    const [playersStates, setPlayersStates] = useState([
+        {name: 'Player 1', symbol: 'X'}, 
+        {name: 'Player 2', symbol: 'O'}
+    ])
+
+    const [activeInd, setActiveInd] = useState(0);
     const [moveHistory, setMoveHistory] = useState([]);
 
 
     // --- Functions ---
-    const togglePlayer = () => setActivePlayer(activePlayer === 'X' ? 'O' : 'X')
+    const togglePlayer = () => setActiveInd(activeInd === 0 ? 1 : 0)
+    const handleBoardClick = (i,j) => {
+        // console.log("Clicked:",i, j)
+        // const newBoard = [...board]
+        // newBoard[i][j] = activePlayer
+        // setBoard(newBoard)
+        addPlayerMove(i, j)
+        togglePlayer()
+    }
     const addPlayerMove = (row, col) => {
         const copyHistory = moveHistory
         copyHistory.push([activePlayer, row, col])
         setMoveHistory(copyHistory)
       
     }
+
+    const playerProps = {
+        playersStates,
+        setPlayersStates,
+        activeInd
+    }
     return (
         <main>
             <div id="game-container">
                 <ol id="players" className="highlight-player">
-                    <Player
-                        initialName="Player 1"
-                        symbol="X"
-                        activePlayer={activePlayer}
-                    />
-                    <Player
-                        initialName="Player 2"
-                        symbol="O"
-                        activePlayer={activePlayer}
-                    />
+                    <Player playerProps={playerProps} playerIndex={0} />
+                    <Player playerProps={playerProps} playerIndex={1} />
                 </ol>
                 <center>
                     <div id="game-board">Game Board</div>
                     <GameBoard
-                        activePlayer={activePlayer}
-                        togglePlayer={togglePlayer}
-                        addPlayerMove={addPlayerMove}
+                        playerProps={playerProps}
+                        handleBoardClick={handleBoardClick}
+                        moveHistory={moveHistory}
                     />
                 </center>
             </div>
-            <Log logStack={moveHistory} />
+            <Log playerProps={playerProps} moveHistory={moveHistory} />
             <center>
                 <button onClick={() => window.location.reload(false)}>
                     Reset Game

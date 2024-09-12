@@ -1,14 +1,26 @@
 import React from 'react'
 import { useState } from 'react'
 
-export default function Player({ initialName, symbol, activePlayer }) {
+export default function Player({playerProps, playerIndex}) {
+    const { playersStates, setPlayersStates, activeInd } = playerProps
+    const {name, symbol} = playersStates[playerIndex]
+    const isActive = playerIndex === activeInd
+
     // --- State ---
     const [isEditing, setIsEditing] = useState(false)
-    const [chosenName, setChosenName] = useState(initialName)
-    const isActive = activePlayer === symbol
 
     // --- Functions ---
-    const handleEditName = (event) => setChosenName(event.target.value)
+    const handleEditName = (event) => {
+        const copyPlayerStates = playersStates
+        copyPlayerStates[playerIndex].name = event.target.value
+        setPlayersStates(copyPlayerStates)
+    }
+
+    const handleEditSymbol = (event) => {
+        const copyPlayerStates = playersStates
+        copyPlayerStates[playerIndex].symbol = event.target.value[0]
+        setPlayersStates(copyPlayerStates)
+    }
 
     // --- Conditional rendering ---
 
@@ -23,11 +35,23 @@ export default function Player({ initialName, symbol, activePlayer }) {
         <input
             className="player"
             type="text"
-            defaultValue={chosenName}
+            defaultValue={name}
             onChange={handleEditName}
         />
     ) : (
-        <span className="player-name">{chosenName}</span>
+        <span className="player-name">{name}</span>
+    )
+
+    // Logic: Editable SymbolBox
+    const symbolNameBox = isEditing ? (
+        <input
+            className="player-symbol"
+            type="text"
+            defaultValue={name}
+            onChange={handleEditSymbol}
+        />
+    ) : (
+        <span className="player-symbol">{symbol}</span>
     )
 
     // Logic: Edit/Save Button
@@ -50,9 +74,7 @@ export default function Player({ initialName, symbol, activePlayer }) {
     return (
         <li id="players" className={isActive ? 'active' : ''}>
             <span id="players">
-                {playerNameBox}
-                <span className="player-symbol">{symbol}</span>
-                {editSaveButton}
+                {playerNameBox}{symbolNameBox}{editSaveButton}
             </span>
         </li>
     )

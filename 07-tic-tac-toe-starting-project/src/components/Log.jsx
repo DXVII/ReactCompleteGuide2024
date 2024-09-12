@@ -1,4 +1,4 @@
-export default function Log({logStack}) {
+export default function Log({ moveHistory }) {
     // console.log(logStack)
     return (
         <div id="log">

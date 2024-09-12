@@ -1,15 +1,7 @@
 import { useState } from 'react'
-export default function GameBoard({ activePlayer, togglePlayer, addPlayerMove }) {
-    const [board, setBoard] = useState(createSquareArray(3))
-
-    function handleBoardClick(i, j) {
-        // console.log("Clicked:",i, j)
-        const newBoard = [...board]
-        newBoard[i][j] = activePlayer
-        setBoard(newBoard)
-        addPlayerMove(i,j)
-        togglePlayer()
-    }
+export default function GameBoard({ playerProps, handleBoardClick, moveHistory }) {
+    const { playersStates } = playerProps
+    const board = deriveBoard(moveHistory, playersStates)
 
     const displayBoardCols = (row, i) => (
         <ol>
@@ -35,9 +27,23 @@ export default function GameBoard({ activePlayer, togglePlayer, addPlayerMove })
     return visualiseBoard
 }
 
+// Helper Function - derive board state
+const deriveBoard = (moveHistory, playersStates) => {
+    const board = createSquareArray(3)
+    let ind = 0
+    moveHistory.map((log) => {
+        const symbol = playersStates[ind].symbol
+        const row = log[1]
+        const col = log[2]
+        board[row][col] = symbol
+        ind = ind === 0 ? 1 : 0
+    })
+    return board
+}
+
 // Helper Function - 2 dimensional array
 // map(rows), map(cols), set value ''
-const createSquareArray = (n) =>
+export const createSquareArray = (n) =>
     [...Array(n)].map(() => [...Array(n)].map(() => ''))
 
 /* Note the fill method seems to create the same object and replicate it, 
@@ -45,3 +51,15 @@ each row was pointing to the same object*/
 // const [board, setBoard] = useState(
 //     new Array(3).fill(new Array(3).fill('x'))
 // )
+
+
+/*
+TODO:
+create a derived board state using the move history
+start with initial board and replay populating the board with symbols from the 
+
+move history array 
+and
+Player symbol
+
+*/ 
