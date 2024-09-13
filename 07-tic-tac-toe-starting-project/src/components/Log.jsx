@@ -1,14 +1,26 @@
-export default function Log({logStack}) {
+export default function Log({ playerProps, moveHistory }) {
+    const { playersStates } = playerProps
     // console.log(logStack)
     return (
         <div id="log">
-            <ol>{generateStackList(logStack)}</ol>
+            <ol>{generateStackList(moveHistory, playersStates)}</ol>
         </div>
     )
 }
 
-function generateStackList(logStack){
-    return logStack.map(elem => 
-        <li>{`${elem[0]} played on row ${elem[1]+1}, col ${elem[2]+1}`}</li>
-    )
+function generateStackList(moveHistory, playerStates) {
+    return moveHistory.map((log, index) => {
+        const [activeInd, row, col] = log
+        const key = 'Log-' + `${index}`
+        const logtext = (
+            <li key={key}>{`${playerStates[activeInd].name} played 
+                ${playerStates[activeInd].symbol} on 
+                row ${row + 1}, col ${col + 1}`}</li>
+        )
+        return logtext
+    })
 }
+
+/*TODO:
+    fix log 0 undefined error 
+*/
