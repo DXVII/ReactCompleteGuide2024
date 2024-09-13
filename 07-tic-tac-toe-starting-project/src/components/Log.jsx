@@ -9,7 +9,7 @@ export default function Log({ playerProps, moveHistory }) {
 }
 
 function generateStackList(moveHistory, playerStates) {
-    return moveHistory.map((log,index) => {
+    return moveHistory.map((log, index) => {
         const [activeInd, row, col] = log
         const key = 'Log-' + `${index}`
         const logtext = (
