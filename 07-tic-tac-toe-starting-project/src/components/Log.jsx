@@ -9,11 +9,12 @@ export default function Log({ playerProps, moveHistory }) {
 }
 
 function generateStackList(moveHistory, playerStates) {
-    return moveHistory.map((log) => {
-        const [ind, row, col] = log
+    return moveHistory.map((log,index) => {
+        const [activeInd, row, col] = log
+        const key = 'Log-' + `${index}`
         const logtext = (
-            <li key={log}>{`${playerStates[ind].name} played 
-                ${playerStates[ind].symbol} on 
+            <li key={key}>{`${playerStates[activeInd].name} played 
+                ${playerStates[activeInd].symbol} on 
                 row ${row + 1}, col ${col + 1}`}</li>
         )
         return logtext
