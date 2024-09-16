@@ -71,22 +71,23 @@ export default function Player({ playerProps, playerIndex, isGameEnded }) {
     // 4) onclicking edit, switch isEditing to true
     // --> 1)
     const editSaveButton = (isGameEnded) => {
-        if (isGameEnded)
+        if (isGameEnded){
             return (
                 <button id="players" disabled>
                     Edit
                 </button>
             )
-
-        return isEditing ? (
-            <button id="players" onClick={() => setIsEditing(false)}>
-                Save
-            </button>
-        ) : (
-            <button id="players" onClick={() => setIsEditing(true)}>
-                Edit
-            </button>
-        )
+        } else {
+            return isEditing ? (
+                <button id="players" onClick={() => setIsEditing(false)}>
+                    Save
+                </button>
+            ) : (
+                <button id="players" onClick={() => setIsEditing(true)}>
+                    Edit
+                </button>
+            )
+        }
     }
 
     // --- Component Output ---

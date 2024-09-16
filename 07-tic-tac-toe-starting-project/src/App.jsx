@@ -22,7 +22,7 @@ export default function App() {
         // console.log("Clicked:",i, j)
         if (gameResult === GAME_ONGOING) addPlayerMove(i, j)
         checkGameResult()
-        if (gameResult===GAME_ONGOING) togglePlayer()
+        if (gameResult === GAME_ONGOING) togglePlayer()
     }
     const addPlayerMove = (row, col) => {
         const copyHistory = moveHistory
@@ -35,7 +35,6 @@ export default function App() {
         if (checkWin(board, activePlayerInd)) setGameResult(GAME_WIN)
         else if (checkDraw(board)) setGameResult(GAME_DRAW)
     }
-    
 
     const togglePlayer = () => setActiveInd(activeInd === 0 ? 1 : 0)
 
@@ -84,8 +83,6 @@ export default function App() {
         </main>
     )
 }
-
-
 
 const checkDraw = (board) => {
     return board.every((row) => row.every((cell) => cell !== EMPTY_CELL))
