@@ -20,5 +20,3 @@ function generateStackList(moveHistory, playerStates) {
         return logtext
     })
 }
-
-

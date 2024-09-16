@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-export default function Player({ playerProps, playerIndex }) {
+export default function Player({ playerProps, playerIndex, isGameEnded }) {
     const { playersStates, setPlayersStates, activeInd } = playerProps
     const { name, symbol } = playersStates[playerIndex]
     const isActive = playerIndex === activeInd
@@ -19,9 +19,10 @@ export default function Player({ playerProps, playerIndex }) {
     const handleEditSymbol = (event) => {
         const copyPlayerStates = playersStates
         // ensure input symbol is not an empty player input
-        const inputSymbol = event.target.value[0].trim().length === 0 
-            ? '_' 
-            : event.target.value[0] 
+        const inputSymbol =
+            event.target.value[0].trim().length === 0
+                ? '_'
+                : event.target.value[0]
         copyPlayerStates[playerIndex].symbol = inputSymbol
         setPlayersStates(copyPlayerStates)
     }
@@ -69,15 +70,24 @@ export default function Player({ playerProps, playerIndex }) {
     // 3) now not editting, show edit button
     // 4) onclicking edit, switch isEditing to true
     // --> 1)
-    const editSaveButton = isEditing ? (
-        <button id="players" onClick={() => setIsEditing(false)}>
-            Save
-        </button>
-    ) : (
-        <button id="players" onClick={() => setIsEditing(true)}>
-            Edit
-        </button>
-    )
+    const editSaveButton = (isGameEnded) => {
+        if (isGameEnded)
+            return (
+                <button id="players" disabled>
+                    Edit
+                </button>
+            )
+
+        return isEditing ? (
+            <button id="players" onClick={() => setIsEditing(false)}>
+                Save
+            </button>
+        ) : (
+            <button id="players" onClick={() => setIsEditing(true)}>
+                Edit
+            </button>
+        )
+    }
 
     // --- Component Output ---
     return (
@@ -85,7 +95,7 @@ export default function Player({ playerProps, playerIndex }) {
             <span id="players">
                 {playerNameBox}
                 {symbolNameBox}
-                {editSaveButton}
+                {editSaveButton(isGameEnded)}
             </span>
         </li>
     )

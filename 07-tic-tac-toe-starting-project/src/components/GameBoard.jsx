@@ -36,7 +36,7 @@ export const deriveBoard = (moveHistory, playersStates) => {
     const board = createSquareArray(3)
     moveHistory.map((log) => {
         const [ind, row, col] = log
-        board[row][col] = playersStates? playersStates[ind].symbol : ind
+        board[row][col] = playersStates ? playersStates[ind].symbol : ind
     })
     return board
 }

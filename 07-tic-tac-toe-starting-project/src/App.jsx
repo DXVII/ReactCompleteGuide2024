@@ -3,7 +3,7 @@ import Player from './components/Player'
 import GameBoard, { EMPTY_CELL, deriveBoard } from './components/GameBoard'
 import Log from './components/Log'
 
-import { WINNING_COMBINATIONS} from './winning-combinations'
+import { WINNING_COMBINATIONS } from './winning-combinations'
 const [GAME_WIN, GAME_DRAW, GAME_ONGOING] = [1, 0, -1]
 
 export default function App() {
@@ -18,18 +18,26 @@ export default function App() {
     const [gameResult, setGameResult] = useState(GAME_ONGOING)
 
     // --- Functions ---
-    const togglePlayer = () => setActiveInd(activeInd === 0 ? 1 : 0)
     const handleBoardClick = (i, j) => {
         // console.log("Clicked:",i, j)
-        addPlayerMove(i, j)
-        const gameEnded = checkGameResult(moveHistory, playerProps, setGameResult)
-        if (!gameEnded) togglePlayer()
+        if (gameResult === GAME_ONGOING) addPlayerMove(i, j)
+        checkGameResult()
+        if (gameResult===GAME_ONGOING) togglePlayer()
     }
     const addPlayerMove = (row, col) => {
         const copyHistory = moveHistory
         copyHistory.push([activeInd, row, col])
         setMoveHistory(copyHistory)
     }
+    function checkGameResult() {
+        const board = deriveBoard(moveHistory)
+        const activePlayerInd = playerProps.activeInd
+        if (checkWin(board, activePlayerInd)) setGameResult(GAME_WIN)
+        else if (checkDraw(board)) setGameResult(GAME_DRAW)
+    }
+    
+
+    const togglePlayer = () => setActiveInd(activeInd === 0 ? 1 : 0)
 
     const playerProps = {
         playersStates,
@@ -40,8 +48,16 @@ export default function App() {
         <main>
             <div id="game-container">
                 <ol id="players" className="highlight-player">
-                    <Player playerProps={playerProps} playerIndex={0} />
-                    <Player playerProps={playerProps} playerIndex={1} />
+                    <Player
+                        playerProps={playerProps}
+                        playerIndex={0}
+                        isGameEnded={gameResult !== GAME_ONGOING}
+                    />
+                    <Player
+                        playerProps={playerProps}
+                        playerIndex={1}
+                        isGameEnded={gameResult !== GAME_ONGOING}
+                    />
                 </ol>
                 <center>
                     <div id="game-board">Game Board</div>
@@ -50,12 +66,12 @@ export default function App() {
                         handleBoardClick={handleBoardClick}
                         moveHistory={moveHistory}
                     />
-                {gameResult == GAME_WIN && (
-                    <div>{`Winner: ${playersStates[activeInd].name}`}</div>
-                )}
-                {gameResult == GAME_DRAW && (
-                    <div>{`Draw between ${playersStates[0].name} and ${playersStates[1].name}`}</div>
-                )}
+                    {gameResult == GAME_WIN && (
+                        <div>{`Winner: ${playersStates[activeInd].name}`}</div>
+                    )}
+                    {gameResult == GAME_DRAW && (
+                        <div>{`Draw between ${playersStates[0].name} and ${playersStates[1].name}`}</div>
+                    )}
                 </center>
             </div>
 
@@ -70,21 +86,6 @@ export default function App() {
 }
 
 
-function checkGameResult(moveHistory, playerProps, setGameResult) {
-    const board = deriveBoard(moveHistory)
-    const activePlayerInd = playerProps.activeInd
-    
-    if(checkWin(board, activePlayerInd )) {
-        setGameResult(GAME_WIN)
-        return true
-    }
-    else if (checkDraw(board)){
-        setGameResult(GAME_DRAW)
-        return true    
-    }
-    return false
-
-}  
 
 const checkDraw = (board) => {
     return board.every((row) => row.every((cell) => cell !== EMPTY_CELL))
@@ -93,28 +94,25 @@ const checkWin = (board, activePlayerInd) => {
     // console.log("Board:",board)
     // console.log('Active:', activePlayerInd)
     let winDetected = false
-    WINNING_COMBINATIONS.forEach(
-        (winningCombination) => {
-            const winCells = winningCombination.map(
-                (coord) => board[coord.row][coord.column]
-            )
-            // console.log("combo:", winningCombination)
-            // console.log("winCells: ",winCells)
-            const res = winCells.every((winCell) => winCell === activePlayerInd)
-            console.log("res: ", res)
-            if (res){ 
-                winDetected = true
-            }
+    WINNING_COMBINATIONS.forEach((winningCombination) => {
+        const winCells = winningCombination.map(
+            (coord) => board[coord.row][coord.column]
+        )
+        // console.log("combo:", winningCombination)
+        // console.log("winCells: ",winCells)
+        const res = winCells.every((winCell) => winCell === activePlayerInd)
+        console.log('res: ', res)
+        if (res) {
+            winDetected = true
         }
-    )
+    })
     return winDetected
-    
 }
 
 // const checkWin = (row, col, board) => {
 //     console.log("Board:",board)
 //     console.log('Clicked:', row,col)
-    
+
 //     const potentialWins = WINNING_COMBINATIONS.filter((winningCombination) =>
 //         winningCombination.some(
 //             (winCell) =>

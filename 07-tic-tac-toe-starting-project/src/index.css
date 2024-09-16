@@ -103,6 +103,10 @@ h1 {
     color: #f8ca31;
 }
 
+#players button:disabled {
+    color: #383624;
+}
+
 .player {
     border: 2px solid transparent;
     padding: 0.5rem;
@@ -191,6 +195,11 @@ ol {
     cursor: pointer;
     font-family: 'Caprasimo', cursive;
     padding: 1rem;
+    border-radius: 20px;
+}
+
+#game-board button.highlight{
+    background: #f6e35a;
 }
 
 #game-over {
