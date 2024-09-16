@@ -21,6 +21,4 @@ function generateStackList(moveHistory, playerStates) {
     })
 }
 
-/*TODO:
-    fix log 0 undefined error 
-*/
+

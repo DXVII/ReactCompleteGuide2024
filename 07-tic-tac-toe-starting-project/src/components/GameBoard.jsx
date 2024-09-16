@@ -1,4 +1,4 @@
-import { useState } from 'react'
+export const EMPTY_CELL = ''
 export default function GameBoard({
     playerProps,
     handleBoardClick,
@@ -32,11 +32,11 @@ export default function GameBoard({
 }
 
 // Helper Function - derive board state
-const deriveBoard = (moveHistory, playersStates) => {
+export const deriveBoard = (moveHistory, playersStates) => {
     const board = createSquareArray(3)
     moveHistory.map((log) => {
         const [ind, row, col] = log
-        board[row][col] = playersStates[ind].symbol
+        board[row][col] = playersStates? playersStates[ind].symbol : ind
     })
     return board
 }
@@ -44,7 +44,7 @@ const deriveBoard = (moveHistory, playersStates) => {
 // Helper Function - 2 dimensional array
 // map(rows), map(cols), set value ''
 export const createSquareArray = (n) =>
-    [...Array(n)].map(() => [...Array(n)].map(() => ''))
+    [...Array(n)].map(() => [...Array(n)].map(() => EMPTY_CELL))
 
 /* Note the fill method seems to create the same object and replicate it, 
 each row was pointing to the same object*/

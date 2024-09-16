@@ -18,7 +18,11 @@ export default function Player({ playerProps, playerIndex }) {
 
     const handleEditSymbol = (event) => {
         const copyPlayerStates = playersStates
-        copyPlayerStates[playerIndex].symbol = event.target.value[0]
+        // ensure input symbol is not an empty player input
+        const inputSymbol = event.target.value[0].trim().length === 0 
+            ? '_' 
+            : event.target.value[0] 
+        copyPlayerStates[playerIndex].symbol = inputSymbol
         setPlayersStates(copyPlayerStates)
     }
 
@@ -49,7 +53,7 @@ export default function Player({ playerProps, playerIndex }) {
         <input
             className="player"
             type="text"
-            maxlength="1"
+            maxLength="1"
             size="1"
             defaultValue={symbol}
             onChange={handleEditSymbol}
