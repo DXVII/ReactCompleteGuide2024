@@ -24,6 +24,7 @@ export default function GameBoard({
                         <button
                             onClick={() => handleBoardClick(i, j)}
                             className={isWinCell ? 'highlight' : ''}
+                            disabled={col !== EMPTY_CELL}
                         >
                             {col}
                         </button>
