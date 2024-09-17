@@ -1,10 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
+import { GAME_ONGOING } from '../App'
 
-export default function Player({ playerProps, playerIndex }) {
+export default function Player({ playerProps, playerIndex, gameResult }) {
     const { playersStates, setPlayersStates, activeInd } = playerProps
     const { name, symbol } = playersStates[playerIndex]
     const isActive = playerIndex === activeInd
+    const isGameEnded = gameResult !== GAME_ONGOING
 
     // --- State ---
     const [isEditing, setIsEditing] = useState(false)
@@ -18,7 +20,12 @@ export default function Player({ playerProps, playerIndex }) {
 
     const handleEditSymbol = (event) => {
         const copyPlayerStates = playersStates
-        copyPlayerStates[playerIndex].symbol = event.target.value[0]
+        // ensure input symbol is not an empty player input
+        const inputSymbol =
+            event.target.value[0].trim().length === 0
+                ? '_'
+                : event.target.value[0]
+        copyPlayerStates[playerIndex].symbol = inputSymbol
         setPlayersStates(copyPlayerStates)
     }
 
@@ -49,7 +56,7 @@ export default function Player({ playerProps, playerIndex }) {
         <input
             className="player"
             type="text"
-            maxlength="1"
+            maxLength="1"
             size="1"
             defaultValue={symbol}
             onChange={handleEditSymbol}
@@ -65,15 +72,25 @@ export default function Player({ playerProps, playerIndex }) {
     // 3) now not editting, show edit button
     // 4) onclicking edit, switch isEditing to true
     // --> 1)
-    const editSaveButton = isEditing ? (
-        <button id="players" onClick={() => setIsEditing(false)}>
-            Save
-        </button>
-    ) : (
-        <button id="players" onClick={() => setIsEditing(true)}>
-            Edit
-        </button>
-    )
+    const editSaveButton = () => {
+        if (isGameEnded) {
+            return (
+                <button id="players" disabled>
+                    Edit
+                </button>
+            )
+        } else {
+            return isEditing ? (
+                <button id="players" onClick={() => setIsEditing(false)}>
+                    Save
+                </button>
+            ) : (
+                <button id="players" onClick={() => setIsEditing(true)}>
+                    Edit
+                </button>
+            )
+        }
+    }
 
     // --- Component Output ---
     return (
@@ -81,7 +98,7 @@ export default function Player({ playerProps, playerIndex }) {
             <span id="players">
                 {playerNameBox}
                 {symbolNameBox}
-                {editSaveButton}
+                {editSaveButton()}
             </span>
         </li>
     )
