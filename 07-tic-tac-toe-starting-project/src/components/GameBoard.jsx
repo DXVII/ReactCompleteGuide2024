@@ -19,7 +19,7 @@ export default function GameBoard({
                     (cell) => cell[0] == i && cell[1] == j
                 )
 
-                console.log(`Row: ${i},${j} - `, winningCombo)
+      
                 return (
                     <li key={`${i}-${j}`}>
                         <button
