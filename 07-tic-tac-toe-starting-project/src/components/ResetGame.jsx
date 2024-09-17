@@ -1,5 +1,10 @@
 import { GAME_ONGOING } from '../App'
-export function ResetGame({ setMoveHistory, setGameResult, setActiveInd, setWinningCombo }) {
+export function ResetGame({
+    setMoveHistory,
+    setGameResult,
+    setActiveInd,
+    setWinningCombo,
+}) {
     return (
         <center>
             <button

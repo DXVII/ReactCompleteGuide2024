@@ -10,22 +10,21 @@ export default function GameBoard({
     const { playersStates } = playerProps
     const board = deriveBoard(moveHistory, playersStates)
 
-
     // --- Functions ---
 
     const displayBoardCols = (row, i) => (
         <ol>
             {row.map((col, j) => {
                 const isWinCell = winningCombo.some(
-                    (cell) => cell[0]==i && cell[1]==j
+                    (cell) => cell[0] == i && cell[1] == j
                 )
 
-                console.log(`Row: ${i},${j} - `,winningCombo)
+                console.log(`Row: ${i},${j} - `, winningCombo)
                 return (
                     <li key={`${i}-${j}`}>
                         <button
                             onClick={() => handleBoardClick(i, j)}
-                            className= {isWinCell?"highlight":""}
+                            className={isWinCell ? 'highlight' : ''}
                         >
                             {col}
                         </button>
@@ -35,12 +34,11 @@ export default function GameBoard({
         </ol>
     )
 
-
     const visualiseBoard = (
         <ol id="game-board">
-            {board.map((row, i) => 
+            {board.map((row, i) => (
                 <li key={i}>{displayBoardCols(row, i)}</li>
-            )}
+            ))}
         </ol>
     )
 

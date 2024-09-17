@@ -8,7 +8,6 @@ import { WINNING_COMBINATIONS } from './winning-combinations'
 export const [GAME_WIN, GAME_DRAW, GAME_ONGOING] = [1, 0, -1]
 
 export default function App() {
-
     // --- State ---
     const [playersStates, setPlayersStates] = useState([
         { name: 'Player 1', symbol: 'X' },
@@ -49,7 +48,7 @@ export default function App() {
     function togglePlayer() {
         if (gameResult === GAME_ONGOING) setActiveInd(activeInd === 0 ? 1 : 0)
     }
-    
+
     return (
         <main>
             <div id="game-container">
