@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { GAME_ONGOING } from '../App'
 
-export default function Player({ playerProps, playerIndex, gameResult}) {
+export default function Player({ playerProps, playerIndex, gameResult }) {
     const { playersStates, setPlayersStates, activeInd } = playerProps
     const { name, symbol } = playersStates[playerIndex]
     const isActive = playerIndex === activeInd

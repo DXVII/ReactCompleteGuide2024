@@ -27,7 +27,7 @@ export default function App() {
         togglePlayer()
     }
     function addPlayerMove(row, col) {
-        if (gameResult === GAME_ONGOING){
+        if (gameResult === GAME_ONGOING) {
             const copyHistory = moveHistory
             copyHistory.push([activeInd, row, col])
             setMoveHistory(copyHistory)
@@ -42,7 +42,7 @@ export default function App() {
     }
 
     function togglePlayer() {
-         if (gameResult === GAME_ONGOING) setActiveInd(activeInd === 0 ? 1 : 0)
+        if (gameResult === GAME_ONGOING) setActiveInd(activeInd === 0 ? 1 : 0)
     }
     const playerProps = {
         playersStates,
@@ -91,7 +91,7 @@ export default function App() {
     )
 }
 
-function checkDraw(board){
+function checkDraw(board) {
     return board.every((row) => row.every((cell) => cell !== EMPTY_CELL))
 }
 
@@ -116,4 +116,3 @@ function checkWin(board, activePlayerInd, setWinningCombo) {
     })
     return winDetected
 }
-

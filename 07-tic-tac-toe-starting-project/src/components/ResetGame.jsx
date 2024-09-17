@@ -1,4 +1,4 @@
-import { GAME_ONGOING } from "../App"
+import { GAME_ONGOING } from '../App'
 export function ResetGame({ setMoveHistory, setGameResult, setActiveInd }) {
     return (
         <center>

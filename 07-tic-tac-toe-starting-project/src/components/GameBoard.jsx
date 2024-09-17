@@ -1,11 +1,11 @@
 export const EMPTY_CELL = ''
-import { GAME_WIN } from "../App"
+import { GAME_WIN } from '../App'
 export default function GameBoard({
     playerProps,
     handleBoardClick,
     moveHistory,
     gameResult,
-    winningCombo
+    winningCombo,
 }) {
     // --- States ---
     const { playersStates } = playerProps
@@ -30,14 +30,12 @@ export default function GameBoard({
 
     const visualiseBoard = (
         <ol id="game-board">
-            {board.map((row, i) =>
+            {board.map((row, i) => (
                 <li key={i}>{displayBoardCols(row, i)}</li>
-                
-            )}
+            ))}
         </ol>
     )
-//  winnerDetected ? endboard(row, i) : <li key={i}>{displayBoardCols(row, i)}</li>
-  
+    //  winnerDetected ? endboard(row, i) : <li key={i}>{displayBoardCols(row, i)}</li>
 
     // console.log(vizBoard)
     return visualiseBoard
