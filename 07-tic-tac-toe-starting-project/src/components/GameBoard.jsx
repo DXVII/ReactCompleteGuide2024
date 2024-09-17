@@ -4,29 +4,35 @@ export default function GameBoard({
     playerProps,
     handleBoardClick,
     moveHistory,
-    gameResult,
     winningCombo,
 }) {
     // --- States ---
     const { playersStates } = playerProps
     const board = deriveBoard(moveHistory, playersStates)
-    const winnerDetected = gameResult === GAME_WIN
 
     // --- Functions ---
+
     const displayBoardCols = (row, i) => (
         <ol>
-            {row.map((col, j) => (
-                <li key={`${i}-${j}`}>
-                    <button onClick={() => handleBoardClick(i, j)}>
-                        {col}
-                    </button>
-                </li>
-            ))}
+            {row.map((col, j) => {
+                const isWinCell = winningCombo.some(
+                    (cell) => cell[0] == i && cell[1] == j
+                )
+
+                return (
+                    <li key={`${i}-${j}`}>
+                        <button
+                            onClick={() => handleBoardClick(i, j)}
+                            className={isWinCell ? 'highlight' : ''}
+                            disabled={col !== EMPTY_CELL}
+                        >
+                            {col}
+                        </button>
+                    </li>
+                )
+            })}
         </ol>
     )
-    const endboard = () => {
-        winningCombo
-    }
 
     const visualiseBoard = (
         <ol id="game-board">
@@ -35,7 +41,6 @@ export default function GameBoard({
             ))}
         </ol>
     )
-    //  winnerDetected ? endboard(row, i) : <li key={i}>{displayBoardCols(row, i)}</li>
 
     // console.log(vizBoard)
     return visualiseBoard

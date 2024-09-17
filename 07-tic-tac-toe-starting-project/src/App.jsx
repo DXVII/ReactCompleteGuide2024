@@ -18,7 +18,11 @@ export default function App() {
     const [moveHistory, setMoveHistory] = useState([])
     const [gameResult, setGameResult] = useState(GAME_ONGOING)
     const [winningCombo, setWinningCombo] = useState([])
-
+    const playerProps = {
+        playersStates,
+        setPlayersStates,
+        activeInd,
+    }
     // --- Functions ---
     function handleBoardClick(i, j) {
         // console.log("Clicked:",i, j)
@@ -44,11 +48,7 @@ export default function App() {
     function togglePlayer() {
         if (gameResult === GAME_ONGOING) setActiveInd(activeInd === 0 ? 1 : 0)
     }
-    const playerProps = {
-        playersStates,
-        setPlayersStates,
-        activeInd,
-    }
+
     return (
         <main>
             <div id="game-container">
@@ -70,12 +70,13 @@ export default function App() {
                         playerProps={playerProps}
                         handleBoardClick={handleBoardClick}
                         moveHistory={moveHistory}
-                        gameResult={gameResult}
+                        winningCombo={winningCombo}
                     />
                     <ResetGame
                         setMoveHistory={setMoveHistory}
                         setGameResult={setGameResult}
                         setActiveInd={setActiveInd}
+                        setWinningCombo={setWinningCombo}
                     />
                     {gameResult == GAME_WIN && (
                         <div>{`Winner: ${playersStates[activeInd].name}`}</div>
