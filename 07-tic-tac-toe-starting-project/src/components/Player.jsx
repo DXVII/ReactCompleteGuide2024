@@ -1,10 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
+import { GAME_ONGOING } from '../App'
 
-export default function Player({ playerProps, playerIndex, isGameEnded }) {
+export default function Player({ playerProps, playerIndex, gameResult}) {
     const { playersStates, setPlayersStates, activeInd } = playerProps
     const { name, symbol } = playersStates[playerIndex]
     const isActive = playerIndex === activeInd
+    const isGameEnded = gameResult !== GAME_ONGOING
 
     // --- State ---
     const [isEditing, setIsEditing] = useState(false)
@@ -70,8 +72,8 @@ export default function Player({ playerProps, playerIndex, isGameEnded }) {
     // 3) now not editting, show edit button
     // 4) onclicking edit, switch isEditing to true
     // --> 1)
-    const editSaveButton = (isGameEnded) => {
-        if (isGameEnded){
+    const editSaveButton = () => {
+        if (isGameEnded) {
             return (
                 <button id="players" disabled>
                     Edit
@@ -96,7 +98,7 @@ export default function Player({ playerProps, playerIndex, isGameEnded }) {
             <span id="players">
                 {playerNameBox}
                 {symbolNameBox}
-                {editSaveButton(isGameEnded)}
+                {editSaveButton()}
             </span>
         </li>
     )
