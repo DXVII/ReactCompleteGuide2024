@@ -1,17 +1,21 @@
 import { useState } from 'react'
 
-export function UserInput() {
+export function UserInput({numRows}) {
     const [userInput, setUserInput] = useState({
         initialInvestment: 10000,
         annualInvestment: 1200,
         expectedReturns: 6,
         duration: 10,
+        stonks: 0,
+        struggle:100,
     })
-    function handleChangeUserInput(inputTitle, e) {
+    function handleChangeUserInput(userInputKey, event) {
+        // takes previous state and deep copy
+        // overwrite the only field that has changed
         setUserInput((prevUserInput) => {
             return {
                 ...prevUserInput,
-                [inputTitle]: e.target.value,
+                [userInputKey]: event.target.value,
             }
         })
     }
@@ -20,19 +24,20 @@ export function UserInput() {
     return (
         <>
             <section id="user-input">
-                {createInputGroupRow(userInputEventProps, [
-                    ['Initial Investment', 'Annual Investment'],
-                    ['Expected Returns', 'Duration'],
-                ])}
+                {createInputGroupRow(userInputEventProps, numRows)}
             </section>
         </>
     )
 }
 
-function createInputGroupRow(userInputEventProps, inputTitles) {
-    return inputTitles.map((row, rowInd) => {
-        const labelInput = row.map((labelName) =>
-            createLabelAndInputCols(userInputEventProps, labelName)
+function createInputGroupRow(userInputEventProps, numRows) {
+    
+    const { userInput } = userInputEventProps
+    const userInput2DArray = splitUserInputStateIntoLabelTitleRows(userInput, numRows)
+    
+    return userInput2DArray.map((row, rowInd) => {
+        const labelInput = row.map((userInputKey) =>
+            createLabelAndInputCols(userInputEventProps, userInputKey)
         )
         return (
             <div key={rowInd} className="input-group">
@@ -41,8 +46,9 @@ function createInputGroupRow(userInputEventProps, inputTitles) {
         )
     })
 }
-function createLabelAndInputCols(userInputEventProps, labelName) {
-    const { handleChangeUserInput, userInput } = userInputEventProps
+function createLabelAndInputCols(userInputEventProps, userInputKey) {
+    const { userInput, handleChangeUserInput } = userInputEventProps
+    const labelName = fromCamelCaseToLabelTitle(userInputKey)
     return (
         <p key={`labelInput-${labelName}`}>
             <label key={`label-${labelName}`}>{labelName}</label>
@@ -51,22 +57,39 @@ function createLabelAndInputCols(userInputEventProps, labelName) {
                 required
                 type="number"
                 min={0}
-                value={userInput[convertTitleToCamelCaseKey(labelName)]}
-                onChange={(e) =>
-                    handleChangeUserInput(
-                        convertTitleToCamelCaseKey(labelName),
-                        e
-                    )
-                }
+                value={userInput[userInputKey]}
+                onChange={(event) => handleChangeUserInput(userInputKey, event)}
                 placeholder={labelName}
             />
         </p>
     )
 }
 
-function convertTitleToCamelCaseKey(title) {
-    // remove all spaces
-    let variable = title.replace(/\s+/g, '')
-    // convert first char to lowerCase
-    return variable.charAt(0).toLowerCase() + variable.slice(1)
+
+// --- Helper Automation Functions --
+function splitUserInputStateIntoLabelTitleRows(userInput, numRows) {
+    if (numRows <= 0) {
+        throw new Error('Number of rows must be greater than zero.')
+    }
+    const array = Object.keys(userInput)
+    
+    const result = []
+    const numCols = Math.ceil(array.length / numRows) // Calculate the number of columns
+    
+    for (let i = 0; i < numRows; i++) {
+        const start = i * numCols // Calculate the starting index for each row
+        const end = start + numCols // Calculate the ending index
+        const row = array.slice(start, end) // Get the slice of the array
+        result.push(row) // Add the row to the result
+    }
+
+    return result
+}
+
+function fromCamelCaseToLabelTitle(input) {
+    // Use a regular expression to insert spaces before capital letters
+    return input
+        .replace(/([A-Z])/g, ' $1') // Insert a space before each capital letter
+        .replace(/^./, (str) => str.toUpperCase()) // Capitalize the first letter
+        .trim() // Remove any leading/trailing whitespace
 }
