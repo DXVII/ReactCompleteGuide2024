@@ -1,26 +1,30 @@
 import { useState } from 'react'
 
-export function UserInput({numRows}) {
+export function UserInput({ numRows }) {
+
     const [userInput, setUserInput] = useState({
         initialInvestment: 10000,
         annualInvestment: 1200,
         expectedReturns: 6,
         duration: 10,
-        stonks: 0,
-        struggle:100,
+        collinLa: 300
     })
+
     function handleChangeUserInput(userInputKey, event) {
         // takes previous state and deep copy
         // overwrite the only field that has changed
         setUserInput((prevUserInput) => {
             return {
                 ...prevUserInput,
-                [userInputKey]: event.target.value,
+                [userInputKey]: Number(event.target.value),
             }
         })
     }
+
+    console.log('State - UserInput', userInput)
+    
+    
     const userInputEventProps = { userInput, handleChangeUserInput }
-    console.log(userInput)
     return (
         <>
             <section id="user-input">
@@ -30,11 +34,16 @@ export function UserInput({numRows}) {
     )
 }
 
+
+
+// --- Component Creation ---
 function createInputGroupRow(userInputEventProps, numRows) {
-    
     const { userInput } = userInputEventProps
-    const userInput2DArray = splitUserInputStateIntoLabelTitleRows(userInput, numRows)
-    
+    const userInput2DArray = splitUserInputStateIntoLabelTitleRows(
+        userInput,
+        numRows
+    )
+
     return userInput2DArray.map((row, rowInd) => {
         const labelInput = row.map((userInputKey) =>
             createLabelAndInputCols(userInputEventProps, userInputKey)
@@ -72,10 +81,10 @@ function splitUserInputStateIntoLabelTitleRows(userInput, numRows) {
         throw new Error('Number of rows must be greater than zero.')
     }
     const array = Object.keys(userInput)
-    
+
     const result = []
     const numCols = Math.ceil(array.length / numRows) // Calculate the number of columns
-    
+
     for (let i = 0; i < numRows; i++) {
         const start = i * numCols // Calculate the starting index for each row
         const end = start + numCols // Calculate the ending index
