@@ -4,7 +4,7 @@ function App() {
     return (
         <>
             <Header />
-            <UserInput numRows={3} />
+            <UserInput numRows={2} />
         </>
     )
 }

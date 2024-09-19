@@ -1,13 +1,11 @@
 import { useState } from 'react'
 
 export function UserInput({ numRows }) {
-
     const [userInput, setUserInput] = useState({
         initialInvestment: 10000,
         annualInvestment: 1200,
         expectedReturns: 6,
-        duration: 10,
-        collinLa: 300
+        duration: 10
     })
 
     function handleChangeUserInput(userInputKey, event) {
@@ -22,8 +20,7 @@ export function UserInput({ numRows }) {
     }
 
     console.log('State - UserInput', userInput)
-    
-    
+
     const userInputEventProps = { userInput, handleChangeUserInput }
     return (
         <>
@@ -33,8 +30,6 @@ export function UserInput({ numRows }) {
         </>
     )
 }
-
-
 
 // --- Component Creation ---
 function createInputGroupRow(userInputEventProps, numRows) {
@@ -73,7 +68,6 @@ function createLabelAndInputCols(userInputEventProps, userInputKey) {
         </p>
     )
 }
-
 
 // --- Helper Automation Functions --
 function splitUserInputStateIntoLabelTitleRows(userInput, numRows) {
