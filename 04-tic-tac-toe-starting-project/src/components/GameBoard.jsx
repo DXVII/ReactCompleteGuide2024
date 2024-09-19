@@ -1,5 +1,4 @@
 export const EMPTY_CELL = ''
-import { GAME_WIN } from '../App'
 export default function GameBoard({
     playerProps,
     handleBoardClick,
