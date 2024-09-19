@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-
 export function UserInput() {
     const [userInput, setUserInput] = useState({
         initialInvestment: 10000,
@@ -14,26 +13,21 @@ export function UserInput() {
                 ...prevUserInput,
                 [inputTitle]: e.target.value,
             }
-        })    
+        })
     }
     const userInputEventProps = { userInput, handleChangeUserInput }
     console.log(userInput)
     return (
         <>
             <section id="user-input">
-                {createInputGroupRow(
-                    userInputEventProps, 
-                    [
-                        ['Initial Investment', 'Annual Investment'],
-                        ['Expected Returns', 'Duration'],
-                    ]
-                )}
+                {createInputGroupRow(userInputEventProps, [
+                    ['Initial Investment', 'Annual Investment'],
+                    ['Expected Returns', 'Duration'],
+                ])}
             </section>
         </>
     )
 }
-
-
 
 function createInputGroupRow(userInputEventProps, inputTitles) {
     return inputTitles.map((row, rowInd) => {
