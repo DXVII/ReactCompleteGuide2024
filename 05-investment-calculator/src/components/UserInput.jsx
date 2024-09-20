@@ -1,27 +1,10 @@
-import { useState } from 'react'
 
-export function UserInput({ numRows }) {
-    const [userInput, setUserInput] = useState({
-        initialInvestment: 10000,
-        annualInvestment: 1200,
-        expectedReturns: 6,
-        duration: 10
-    })
+export default function UserInput({ numRows, userInputEventProps }) {
+    console.log(
+        'State - UserInput',
+        userInputEventProps.userInput
+    )
 
-    function handleChangeUserInput(userInputKey, event) {
-        // takes previous state and deep copy
-        // overwrite the only field that has changed
-        setUserInput((prevUserInput) => {
-            return {
-                ...prevUserInput,
-                [userInputKey]: Number(event.target.value),
-            }
-        })
-    }
-
-    console.log('State - UserInput', userInput)
-
-    const userInputEventProps = { userInput, handleChangeUserInput }
     return (
         <>
             <section id="user-input">
