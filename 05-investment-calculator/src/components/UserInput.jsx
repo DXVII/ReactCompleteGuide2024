@@ -1,9 +1,5 @@
-
 export default function UserInput({ numRows, userInputEventProps }) {
-    console.log(
-        'State - UserInput',
-        userInputEventProps.userInput
-    )
+    console.log('State - UserInput', userInputEventProps.userInput)
 
     return (
         <>

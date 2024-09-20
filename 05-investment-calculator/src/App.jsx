@@ -1,5 +1,5 @@
 import './index.css'
-import{ useState } from 'react'
+import { useState } from 'react'
 import UserInput from './components/UserInput'
 import Header from './components/Header'
 import Results from './components/Results'
