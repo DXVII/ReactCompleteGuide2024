@@ -46,9 +46,9 @@ function investmentDetailBody(investmentResult) {
 
 function investmentDetailBodyRow(dataRow) {
     const { year, ...financialData } = dataRow
-    const financialDataCells = Object.keys(financialData).map(
-        (key) => <td>{financialData[key].toFixed(DECIMAL_POINTS)}</td>
-    )
+    const financialDataCells = Object.keys(financialData).map((key) => (
+        <td>{financialData[key].toFixed(DECIMAL_POINTS)}</td>
+    ))
     return (
         <tr key={`investmentTableRow-${year}`}>
             <th>{year}</th>

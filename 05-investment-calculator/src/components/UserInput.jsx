@@ -3,7 +3,6 @@ import {
     fromCamelCaseToLabelTitle,
 } from '../util/formatting'
 
-
 export default function UserInput({ numRows, userInputEventProps }) {
     console.log('State - UserInput', userInputEventProps.userInput)
 
