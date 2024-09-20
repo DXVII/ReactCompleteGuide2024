@@ -1,5 +1,5 @@
 // --- Helper Automation Functions --
-export function splitObjectInto2DArray(userInput, numRows) {
+export function splitStateObjectInto2DArray(userInput, numRows) {
     if (numRows <= 0) {
         throw new Error('Number of rows must be greater than zero.')
     }

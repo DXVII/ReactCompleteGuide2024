@@ -1,4 +1,9 @@
-import {splitObjectInto2DArray, fromCamelCaseToLabelTitle} from '../util/formatting'
+import {
+    splitStateObjectInto2DArray,
+    fromCamelCaseToLabelTitle,
+} from '../util/formatting'
+
+
 export default function UserInput({ numRows, userInputEventProps }) {
     console.log('State - UserInput', userInputEventProps.userInput)
 
@@ -14,10 +19,7 @@ export default function UserInput({ numRows, userInputEventProps }) {
 // --- Component Creation ---
 function createInputGroupRow(userInputEventProps, numRows) {
     const { userInput } = userInputEventProps
-    const userInput2DArray = splitObjectInto2DArray(
-        userInput,
-        numRows
-    )
+    const userInput2DArray = splitStateObjectInto2DArray(userInput, numRows)
 
     return userInput2DArray.map((row, rowInd) => {
         const labelInput = row.map((userInputKey) =>
@@ -48,4 +50,3 @@ function createLabelAndInputCols(userInputEventProps, userInputKey) {
         </p>
     )
 }
-

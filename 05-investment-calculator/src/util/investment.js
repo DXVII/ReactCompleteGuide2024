@@ -10,7 +10,6 @@ export function calculateInvestmentResults({
     expectedReturn,
     duration,
 }) {
-
     console.log('Results - userInput', {
         initialInvestment,
         annualInvestment,
