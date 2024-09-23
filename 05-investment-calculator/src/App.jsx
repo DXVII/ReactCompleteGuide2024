@@ -8,10 +8,10 @@ function App() {
     const [userInput, setUserInput] = useState({
         initialInvestment: 10000,
         annualInvestment: 1200,
-        expectedReturn: 6,
-        duration: 10,
+        expectedReturn: 5.5,
+        duration: 5,
     })
-
+    const validDuration = userInput.duration > 0
     function handleChangeUserInput(userInputKey, event) {
         // takes previous state and deep copy
         // overwrite the only field that has changed
@@ -28,7 +28,13 @@ function App() {
         <>
             <Header />
             <UserInput numRows={2} userInputEventProps={userInputEventProps} />
-            <Results userInput={userInput} />
+            <center>
+                {validDuration ? (
+                    <Results userInput={userInput} />
+                ) : (
+                    <p> Please enter a duration greater than 0 </p>
+                )}
+            </center>
         </>
     )
 }

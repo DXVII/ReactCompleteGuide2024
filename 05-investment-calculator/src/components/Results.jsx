@@ -10,12 +10,12 @@ export default function Results({ userInput }) {
     console.log('Results - Investment Result', investmentResult)
 
     return (
-        <center>
-            <table id="result" className="center">
-                {investmentDetailHead(investmentResult)}
-                {investmentDetailBody(investmentResult)}
-            </table>
-        </center>
+        <table id="result" className="center">
+            {investmentDetailHead(investmentResult)}
+            {investmentDetailBody(investmentResult)}
+        </table>
+        
+        
     )
 }
 
