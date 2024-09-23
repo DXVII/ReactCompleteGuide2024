@@ -14,8 +14,6 @@ export default function Results({ userInput }) {
             {investmentDetailHead(investmentResult)}
             {investmentDetailBody(investmentResult)}
         </table>
-        
-        
     )
 }
 
