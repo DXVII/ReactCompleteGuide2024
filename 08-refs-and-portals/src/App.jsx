@@ -10,7 +10,7 @@ function App() {
                         <TimerBlock
                             key={`challenge-${e + 1}`}
                             title={`Challenge ${e + 1}`}
-                            targetTime={10 * (e + 1)}
+                            targetTime={e + 1}
                         />
                     )
                 })}
