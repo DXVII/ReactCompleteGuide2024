@@ -1,16 +1,20 @@
 import { useState, useRef } from 'react'
 import ResultModal from './ResultModal'
+
 export default function TimerBlock({ title, targetTime }) {
     const timer = useRef()
+    const dialog = useRef()
+    console.log(dialog)
+
     const [timerStarted, setTimerStarted] = useState(false)
     const [timerExpired, setTimerExpired] = useState(false)
 
     function handleStart() {
+        timer.current = setTimeout(() => {
+            setTimerExpired(true)
+            dialog.current.showModal()
+        }, targetTime * 1000)
         setTimerStarted(true)
-        timer.current = setTimeout(
-            () => setTimerExpired(true),
-            targetTime * 1000
-        )
     }
 
     function handleStop() {
@@ -24,7 +28,11 @@ export default function TimerBlock({ title, targetTime }) {
     return (
         <>
             {timerExpired && (
-                <ResultModal result="Lost!" targetTime={targetTime} />
+                <ResultModal
+                    result="Lost!"
+                    targetTime={targetTime}
+                    ref={dialog}
+                />
             )}
             <section className="challenge">
                 <h2>{title}</h2>
