@@ -71,11 +71,12 @@ function App() {
     const cartCtxBridge = {
         items: shoppingCart.items,
         addItemToCart: handleAddItemToCart,
+        updateCartItemQuantity: handleUpdateCartItemQuantity,
     }
 
     return (
         <CartContext.Provider value={cartCtxBridge}>
-            <Header onUpdateCartItemQuantity={handleUpdateCartItemQuantity} />
+            <Header />
             <Shop>
                 {DUMMY_PRODUCTS.map((product) => (
                     <li key={product.id}>
