@@ -68,19 +68,18 @@ function App() {
         })
     }
 
+    const cartCtxBridge = {
+        items: shoppingCart.items,
+        addItemToCart: handleAddItemToCart,
+    }
+
     return (
-        <CartContext.Provider value={{ items: [] }}>
-            <Header
-                cart={shoppingCart}
-                onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
-            />
+        <CartContext.Provider value={cartCtxBridge}>
+            <Header onUpdateCartItemQuantity={handleUpdateCartItemQuantity} />
             <Shop>
                 {DUMMY_PRODUCTS.map((product) => (
                     <li key={product.id}>
-                        <Product
-                            {...product}
-                            onAddToCart={handleAddItemToCart}
-                        />
+                        <Product {...product} />
                     </li>
                 ))}
             </Shop>
